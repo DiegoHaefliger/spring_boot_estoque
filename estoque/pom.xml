@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.estoque</groupId>
-	<artifactId>Estoque</artifactId>
+	<artifactId>estoque</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Estoque</name>
+	<name>estoque</name>
 	<description>Spring Boot Estoque</description>
 	<properties>
 		<java.version>11</java.version>
