@@ -1,12 +1,11 @@
 package com.estoque.spring.entidades;
 
+import com.estoque.spring.entidades.key.ItemEstoqueKey;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.EmbeddedId;
 
 /**
  *
@@ -14,23 +13,21 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "ESTOQUE_ITEM")
-public class EstoqueItem implements Serializable {
+public class ItemEstoque implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-//        @EmbeddedId
-//        private EstoqueItemPK id = new EstoqueItemPK();
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @EmbeddedId
+    private ItemEstoqueKey id = new ItemEstoqueKey();
+
     private Integer quantidade;
     private Double valor;
 
-    public EstoqueItem() {
+    public ItemEstoque() {
 
     }
 
-    public EstoqueItem(Estoque estoque, Produto produto, Integer quantidade, Double valor) {
+    public ItemEstoque(Estoque estoque, Produto produto, Integer quantidade, Double valor) {
         super();
 
     }

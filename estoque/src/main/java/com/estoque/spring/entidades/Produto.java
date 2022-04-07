@@ -3,9 +3,12 @@ package com.estoque.spring.entidades;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -24,21 +27,21 @@ public class Produto implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @ManyToOne()
+    @JoinColumn(name = "id_categoria", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_id_categoria"))
+    private CategoriaProduto categoria;
     private String descricao;
-    private String tipo;
     private Double valor;
-    private Integer quantidade;
 
     public Produto() {
 
     }
 
-    public Produto(Long id, String descricao, String tipo, Double valor, Integer quantidade) {
+    public Produto(Long id, String descricao, Double valor, CategoriaProduto categoria) {
         this.id = id;
         this.descricao = descricao;
-        this.tipo = tipo;
         this.valor = valor;
-        this.quantidade = quantidade;
+        this.categoria = categoria;
     }
 
     public Long getId() {
@@ -57,14 +60,6 @@ public class Produto implements Serializable {
         this.descricao = descricao;
     }
 
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
     public Double getValor() {
         return valor;
     }
@@ -73,22 +68,21 @@ public class Produto implements Serializable {
         this.valor = valor;
     }
 
-    public Integer getQuantidade() {
-        return quantidade;
+    public CategoriaProduto getCategoria() {
+        return categoria;
     }
 
-    public void setQuantidade(Integer quantidade) {
-        this.quantidade = quantidade;
+    public void setCategoria(CategoriaProduto categoria) {
+        this.categoria = categoria;
     }
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 71 * hash + Objects.hashCode(this.id);
-        hash = 71 * hash + Objects.hashCode(this.descricao);
-        hash = 71 * hash + Objects.hashCode(this.tipo);
-        hash = 71 * hash + Objects.hashCode(this.valor);
-        hash = 71 * hash + Objects.hashCode(this.quantidade);
+        int hash = 7;
+        hash = 37 * hash + Objects.hashCode(this.id);
+        hash = 37 * hash + Objects.hashCode(this.descricao);
+        hash = 37 * hash + Objects.hashCode(this.valor);
+        hash = 37 * hash + Objects.hashCode(this.categoria);
         return hash;
     }
 
@@ -107,18 +101,15 @@ public class Produto implements Serializable {
         if (!Objects.equals(this.descricao, other.descricao)) {
             return false;
         }
-        if (!Objects.equals(this.tipo, other.tipo)) {
-            return false;
-        }
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         if (!Objects.equals(this.valor, other.valor)) {
             return false;
         }
-        if (!Objects.equals(this.quantidade, other.quantidade)) {
+        if (!Objects.equals(this.categoria, other.categoria)) {
             return false;
-        }        
+        }
         return true;
     }
 

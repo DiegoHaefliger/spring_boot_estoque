@@ -1,6 +1,6 @@
 package com.estoque.spring.repositorios;
 
-import com.estoque.spring.entidades.EstoqueItem;
+import com.estoque.spring.entidades.ItemEstoque;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
  */
 
 @Repository
-public interface EstoqueItemRepositorio extends JpaRepository<EstoqueItem, Long>{
+public interface ItemEstoqueRepositorio extends JpaRepository<ItemEstoque, Long>{
     
 }
