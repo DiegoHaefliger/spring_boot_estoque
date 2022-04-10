@@ -12,8 +12,8 @@
 ###### - Usuarios:
 - GET Usuários All: path/usuarios
 - GET Usuários ById: path/usuarios/:id
-- DELETE Usuários *****: path/usuarios/:id
-- PUT Usuários *****: path/usuarios/:id
+- DELETE Usuários *: path/usuarios/:id
+- PUT Usuários *: path/usuarios/:id
 ```json
  {
     "id": 1,
@@ -45,9 +45,9 @@
 ------------
 
 ###### - Categoria:
-- GET Categoria All *****: path/categorias
-- GET Categoria ById  *****: path/categorias/:id
-- PUT Categoria *****: path/categorias/:id
+- GET Categoria All *: path/categorias
+- GET Categoria ById  *: path/categorias/:id
+- PUT Categoria *: path/categorias/:id
 ```json
  {
 	"nome": "Cozinha"
@@ -62,17 +62,17 @@
 
 ------------
 ###### - Produto:
-- GET Produto All  *****: path/produtos
-- GET Produto ById  *****: path/produtos/:id
-- DELETE Produto  *****: path/produtos/:id
-- PUT Usuários  *****: path/produtos/:id
+- GET Produto All  *: path/produtos
+- GET Produto ById  *: path/produtos/:id
+- DELETE Produto  *: path/produtos/:id
+- PUT Usuários  *: path/produtos/:id
 ```json
 {
     "id": 7,    
     "valor": 1530.09
 }
 ```
-- POST Produto  *****: path/produtos
+- POST Produto  *: path/produtos
 ```json
 {
     "descricao": "Freezer",    
@@ -91,4 +91,4 @@
 
 ### Anotações
 
->  ***** Rotas que necessitam de autenticação 
+>  * Rotas que necessitam de autenticação 
