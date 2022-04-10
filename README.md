@@ -91,4 +91,4 @@
 
 ### Anotações
 
->  * Rotas que necessitam de autenticação 
+>  '*' Rotas que necessitam de autenticação 
