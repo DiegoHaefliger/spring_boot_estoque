@@ -1,10 +1,10 @@
 package com.estoque.spring.entidades;
 
 import java.io.Serializable;
-import java.sql.Date;
-import java.util.HashSet;
+import java.util.Date;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,28 +17,28 @@ import javax.persistence.Table;
  * @author Diego Haefliger
  */
 @Entity
-@Table(name = "ESTOQUE")
-public class Estoque implements Serializable {
+@Table(name = "PEDIDO")
+public class Pedido implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false)
     private String tipo;
+    @Column(nullable = false)
     private Date data;
 
-    @OneToMany(mappedBy = "id.estoque")
-    private Set<ItemEstoque> estoqueItem = new HashSet<>();
+    @OneToMany(mappedBy = "pedido")    	
+    private List<ItemPedido> item;
 
-    public Estoque() {
-
+    public Pedido() {
     }
 
-    public Estoque(Long id, String tipo, Date data) {
-        this.id = id;
+    public Pedido(String tipo) {
         this.tipo = tipo;
-        this.data = data;
+        this.data = new Date();
     }
 
     public Long getId() {
@@ -65,19 +65,24 @@ public class Estoque implements Serializable {
         this.data = data;
     }
 
-    public Set<ItemEstoque> getEstoqueItem() {
-        return estoqueItem;
-    }
-
     public Double getTotalItem() {
         double total = 0.0;
 
-        for (ItemEstoque e : estoqueItem) {
-            total += e.getSubTotal();
+        for (ItemPedido e : item) {
+//            total += e.getSubTotal();
         }
-
         return total;
     }
+
+    public List<ItemPedido> getItems() {
+        return item;
+    }
+
+    public void setItems(List<ItemPedido> items) {
+        this.item = items;
+    }
+    
+    
 
     @Override
     public int hashCode() {
@@ -99,7 +104,7 @@ public class Estoque implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Estoque other = (Estoque) obj;
+        final Pedido other = (Pedido) obj;
         if (!Objects.equals(this.tipo, other.tipo)) {
             return false;
         }

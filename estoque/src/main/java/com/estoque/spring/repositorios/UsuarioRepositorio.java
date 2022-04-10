@@ -1,14 +1,14 @@
 package com.estoque.spring.repositorios;
 
-import com.estoque.spring.entidades.Pedido;
+import com.estoque.spring.entidades.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
  *
- * @author Diego Haefliger
+ * @author diego haefliger
  */
 @Repository
-public interface EstoqueRepositorio extends JpaRepository<Pedido, Long> {
+public interface UsuarioRepositorio extends JpaRepository<Usuario, Long> {
 
 }

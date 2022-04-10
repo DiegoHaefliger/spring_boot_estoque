@@ -1,14 +1,18 @@
 package com.estoque.spring.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -27,21 +31,24 @@ public class Produto implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne()
-    @JoinColumn(name = "id_categoria", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_id_categoria"))
-    private CategoriaProduto categoria;
     private String descricao;
     private Double valor;
+
+    @ManyToMany
+    @JoinTable(name = "PRODUTO_CATEGORIA", joinColumns = @JoinColumn(name = "produto_id"), inverseJoinColumns = @JoinColumn(name = "categoria_id"))
+    private Set<Categoria> categoria = new HashSet<>();
+
+    @OneToMany(mappedBy = "produto")
+    private Set<ItemPedido> items = new HashSet<>();
 
     public Produto() {
 
     }
 
-    public Produto(Long id, String descricao, Double valor, CategoriaProduto categoria) {
+    public Produto(Long id, String descricao, Double valor) {
         this.id = id;
         this.descricao = descricao;
         this.valor = valor;
-        this.categoria = categoria;
     }
 
     public Long getId() {
@@ -68,21 +75,28 @@ public class Produto implements Serializable {
         this.valor = valor;
     }
 
-    public CategoriaProduto getCategoria() {
+    public Set<Categoria> getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(CategoriaProduto categoria) {
-        this.categoria = categoria;
+    @JsonIgnore
+    public Set<Pedido> getOrders() {
+        Set<Pedido> set = new HashSet<>();
+
+        for (ItemPedido x : items) {
+            set.add(x.getPedido());
+        }
+
+        return set;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 37 * hash + Objects.hashCode(this.id);
-        hash = 37 * hash + Objects.hashCode(this.descricao);
-        hash = 37 * hash + Objects.hashCode(this.valor);
-        hash = 37 * hash + Objects.hashCode(this.categoria);
+        hash = 59 * hash + Objects.hashCode(this.id);
+        hash = 59 * hash + Objects.hashCode(this.categoria);
+        hash = 59 * hash + Objects.hashCode(this.descricao);
+        hash = 59 * hash + Objects.hashCode(this.valor);
         return hash;
     }
 
@@ -104,10 +118,10 @@ public class Produto implements Serializable {
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
-        if (!Objects.equals(this.valor, other.valor)) {
+        if (!Objects.equals(this.categoria, other.categoria)) {
             return false;
         }
-        if (!Objects.equals(this.categoria, other.categoria)) {
+        if (!Objects.equals(this.valor, other.valor)) {
             return false;
         }
         return true;
