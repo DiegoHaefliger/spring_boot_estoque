@@ -1,5 +1,6 @@
 package com.estoque.spring.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -30,15 +31,16 @@ public class Pedido implements Serializable {
     @Column(nullable = false)
     private Date data;
 
-    @OneToMany(mappedBy = "pedido")    	
+    @OneToMany(mappedBy = "pedido")
     private List<ItemPedido> item;
 
     public Pedido() {
     }
 
-    public Pedido(String tipo) {
+    public Pedido(Long id, String tipo, Date data) {
+        this.id = id;
         this.tipo = tipo;
-        this.data = new Date();
+        this.data = data;
     }
 
     public Long getId() {
@@ -65,6 +67,7 @@ public class Pedido implements Serializable {
         this.data = data;
     }
 
+    @JsonIgnore
     public Double getTotalItem() {
         double total = 0.0;
 
@@ -81,8 +84,6 @@ public class Pedido implements Serializable {
     public void setItems(List<ItemPedido> items) {
         this.item = items;
     }
-    
-    
 
     @Override
     public int hashCode() {

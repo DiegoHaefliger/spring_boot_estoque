@@ -1,6 +1,7 @@
 package com.estoque.spring.resource;
 
 import com.estoque.spring.entidades.Usuario;
+import com.estoque.spring.seed.Seed;
 import com.estoque.spring.servicos.UsuarioServico;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;

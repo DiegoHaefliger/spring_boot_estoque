@@ -1,5 +1,6 @@
 package com.estoque.spring;
 
+import com.estoque.spring.seed.Seed;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -9,7 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class EstoqueApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(EstoqueApplication.class, args);
+        SpringApplication.run(EstoqueApplication.class, args);       
     }
 
     @Bean

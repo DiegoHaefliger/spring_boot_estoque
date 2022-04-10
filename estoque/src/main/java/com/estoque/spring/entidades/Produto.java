@@ -33,6 +33,7 @@ public class Produto implements Serializable {
     private Long id;
     private String descricao;
     private Double valor;
+    private Integer saldo;
 
     @ManyToMany
     @JoinTable(name = "PRODUTO_CATEGORIA", joinColumns = @JoinColumn(name = "produto_id"), inverseJoinColumns = @JoinColumn(name = "categoria_id"))
@@ -73,6 +74,14 @@ public class Produto implements Serializable {
 
     public void setValor(Double valor) {
         this.valor = valor;
+    }
+
+    public Integer getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(Integer saldo) {
+        this.saldo = saldo;
     }
 
     public Set<Categoria> getCategoria() {

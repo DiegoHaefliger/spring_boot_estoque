@@ -2,6 +2,8 @@ package com.estoque.spring.entidades;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -24,7 +26,11 @@ public class ItemPedido implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id = 2l;
+    @Column(nullable = false)
+    private Integer quantidade;
+    @Column(nullable = false)
+    private Double valor;
 
     @ManyToOne()
     @JoinColumn(name = "pedido_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_id_pedido"))
@@ -33,17 +39,13 @@ public class ItemPedido implements Serializable {
     @ManyToOne
     @JoinColumn(name = "produto_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_id_produto"))
     private Produto produto;
-    @Column(nullable = false)
-    private Integer quantidade;
-    @Column(nullable = false)
-    private Double valor;
 
     public ItemPedido() {
 
     }
 
-    public ItemPedido(Pedido estoque, Produto produto, Integer quantidade, Double valor) {
-        this.setEstoque(estoque);
+    public ItemPedido(Pedido pedido, Produto produto, Integer quantidade, Double valor) {
+        this.setPedido(pedido);
         this.setProduto(produto);
         this.setQuantidade(quantidade);
         this.setValor(valor);
@@ -54,9 +56,10 @@ public class ItemPedido implements Serializable {
         return pedido;
     }
 
-    public void setPedido(Pedido pedido) {
+    public void setPedido(Pedido pedido) {        
         this.pedido = pedido;
     }
+
     public Long getId() {
         return id;
     }
@@ -65,12 +68,9 @@ public class ItemPedido implements Serializable {
         this.id = id;
     }
 
+    @JsonIgnore
     public Pedido getEstoque() {
         return pedido;
-    }
-
-    public void setEstoque(Pedido estoque) {
-        this.pedido = estoque;
     }
 
     public Produto getProduto() {
@@ -84,6 +84,7 @@ public class ItemPedido implements Serializable {
             this.setValor(produto.getValor());
         }
     }
+
     public Integer getQuantidade() {
         return quantidade;
     }
