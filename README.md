@@ -2,6 +2,10 @@
 
 ------------
 
+### Requisitos
+- Java 11
+- MySql
+
 ### Path
 - path: http://localhost:9001/app/v1.0
 
